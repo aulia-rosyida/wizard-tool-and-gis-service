@@ -25,6 +25,10 @@ code {
   @apply bg-blue-500 text-white;
 }
 
+.btn-dark-blue {
+  @apply bg-blue-800 text-white;
+}
+
 .btn-white {
   @apply bg-white text-slate-400 border-2 border-slate-300;
 }
