@@ -1,4 +1,3 @@
-import StepperCustom from 'components/Stepper';
 import StepperControl from 'components/StepperControl';
 import DragAndCropAOI from 'pages/wizard/DragAndCropAOI';
 import FormData from 'pages/wizard/FormData';
