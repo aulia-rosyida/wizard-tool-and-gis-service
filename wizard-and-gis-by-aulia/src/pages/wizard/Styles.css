@@ -1,0 +1,7 @@
+.line {
+    @apply w-1/2 bg-indigo-700 h-1 flex items-center;
+}
+
+.circle-step {
+    @apply bg-indigo-700 h-6 w-6 rounded-full shadow flex items-center justify-center;
+}
