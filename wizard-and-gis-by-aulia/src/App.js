@@ -8,6 +8,7 @@ import './App.css';
 import { Stepper } from 'react-form-stepper';
 
 
+
 function App() {
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -29,13 +30,29 @@ function App() {
     }
   }
 
+
   const handleClick = (direction) => {
     let newStep = currentStep;
     direction === "next" ? newStep++ : newStep--;
     if (newStep > 0 && newStep <= steps.length) setCurrentStep(newStep);
   }
 
+  // const state = {
+  //   country = '',
+  //   areaName = '',
+  //   periodEvent = '',
+  //   basemapType = '',
+  //   areaOfInterest = '',
+  // }
+
+  // handleChange = input => e => {
+  //   this.setState({ [input]: e.target.value });
+  // }
+
+
+
   return (
+
     <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
       <p className="text-3xl text-gray-700 font-bold mb-5 text-center">
         Welcome to Wizard tools and GIS Services!
@@ -53,7 +70,7 @@ function App() {
             activeBgColor: '#2b7cff',
             activeTextColor: '#fff',
             inactiveBgColor: '#fff',
-            inactiveTextColor: '#2b7cff',
+            inactiveTextColor: '#fff',
             completedBgColor: '#2b7cff',
             completedTextColor: '#fff',
             size: '2em'
@@ -70,6 +87,7 @@ function App() {
       <DisplayStep step={currentStep} />
       <StepperControl handleClick={handleClick} currentStep={currentStep} steps={steps} />
     </div>
+
   );
 
 }

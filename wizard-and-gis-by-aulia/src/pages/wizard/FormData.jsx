@@ -20,6 +20,7 @@ export default function FormData() {
         setValue(newValue);
     }
 
+
     return (
         <div className="container mx-auto bg-white rounded-xl shadow border p-8 m-10" >
             <p className="text-3xl text-gray-700 font-bold mb-5 text-center">
@@ -27,27 +28,29 @@ export default function FormData() {
             </p>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 10, sm: 20, md: 30 }}>
                 <Grid item xs={6} className="pb-4 pr-4">
-                    <TextField fullWidth select id="outlined-select" label="Indonesia" variant="outlined" className="mx-480 my-120 w-1/2">
+                    <TextField fullWidth select id="filled-select" label="Indonesia" variant="outlined" className="mx-480 my-120 w-1/2 ">
                         {countries.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
                                 {option.label}
                             </MenuItem>
                         ))}
                     </TextField>
+
                 </Grid>
-                <Grid item xs={6} className="pb-4 pr-4">
+                <Grid item xs={6} className="pb-4 pr-4 light:bg-white bg-white">
+
                     <Datepicker
                         placeholderText='DD/MM/YYYY'
                         dateFormat='dd/MM/yyyy'
-                        primaryColor={"blue"}
+                        primaryColor={"sky"}
                         value={value}
                         onChange={handleValueChange}
                         showShortcuts={true}
-                        background="bg-white-700 light:bg-white-800"
                     />
+
                 </Grid>
                 <Grid item xs={6} className="pb-4 pr-4">
-                    <TextField fullWidth id="outlined-basic" label="Name of the Area" variant="outlined" />
+                    <TextField fullWidth id="filled-basic" label="Name of the Area" variant="outlined" />
                 </Grid>
             </Grid>
         </div >
