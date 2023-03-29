@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Styles.css';
 
-function FirstStep() {
+function CheckStep() {
     return (
         <div className="line">
             <div className="circle-step">
@@ -11,10 +11,11 @@ function FirstStep() {
     );
 }
 
-function SecondStep() {
+
+function InitialStep({ number }) {
     return (
         <div class=" bg-indigo-700 h-6 w-6 rounded-full shadow flex items-center justify-center -ml-2">
-            <Checklist />
+            <div class="icon icon-tabler icon-tabler-check text-white" >{number}</div>
         </div>
     );
 }
@@ -67,15 +68,15 @@ function Tooltip({ text }) {
 class Wizard extends Component {
     render() {
         return <dh-component>
-            <div class="w-11/12 lg:w-2/6 mx-auto py-12">
+            <div class="w-11/12 lg:w-2/6 mx-auto py-12 pb-24">
                 <div class="bg-gray-200 h-1 flex items-center justify-between">
                     <div class="line justify-between relative" >
                         <Tooltip text="Step 1: analyzing" />
-                        <FirstStep />
+                        <InitialStep number="1" />
                     </div>
                     <div class="line justify-between relative" >
                         <Tooltip text="Step 2: analyzing" />
-                        <SecondStep />
+                        <CheckStep />
                     </div>
                     <div class="line justify-between relative" >
                         <Tooltip text="Step 3: analyzing" />
