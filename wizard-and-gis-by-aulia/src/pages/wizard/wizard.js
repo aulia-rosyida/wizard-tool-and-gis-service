@@ -44,7 +44,7 @@ function UnfilledCircle() {
 
 
 
-function Tooltip() {
+function Tooltip({ text }) {
     return (
         <div class="absolute right-0 -mr-2">
             <div class="relative bg-white shadow-lg px-2 py-1 rounded mt-16 -mr-12">
@@ -57,7 +57,7 @@ function Tooltip() {
                         </g>
                     </g>
                 </svg>
-                <p tabindex="0" class="focus:outline-none text-indigo-700 text-xs font-bold">Step 3: Analyzing</p>
+                <p tabindex="0" class="focus:outline-none text-indigo-700 text-xs font-bold">{text}</p>
             </div>
         </div>
     );
@@ -69,13 +69,16 @@ class Wizard extends Component {
         return <dh-component>
             <div class="w-11/12 lg:w-2/6 mx-auto py-12">
                 <div class="bg-gray-200 h-1 flex items-center justify-between">
-                    <FirstStep />
                     <div class="line justify-between relative" >
-                        <Tooltip />
+                        <Tooltip text="Step 1: analyzing" />
+                        <FirstStep />
+                    </div>
+                    <div class="line justify-between relative" >
+                        <Tooltip text="Step 2: analyzing" />
                         <SecondStep />
                     </div>
                     <div class="line justify-between relative" >
-                        <Tooltip />
+                        <Tooltip text="Step 3: analyzing" />
                         <CurrentStep />
                         <UnfilledCircle />
                     </div>
