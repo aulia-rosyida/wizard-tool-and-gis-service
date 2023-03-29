@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Styles.css';
 
+// [TAKEOUT]
+
 function CheckStep() {
     return (
         <div className="line">
