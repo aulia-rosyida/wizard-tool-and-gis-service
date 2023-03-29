@@ -5,3 +5,8 @@
 .circle-step {
     @apply bg-indigo-700 h-6 w-6 rounded-full shadow flex items-center justify-center;
 }
+
+.datePicker {
+    width: 100%;
+    background: white;
+}
