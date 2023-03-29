@@ -6,20 +6,11 @@ const StepperControl = () => {
             <button className='btn btn-white'>
                 Back
             </button>
-
-
-
             <button class="btn btn-blue">
                 Next
             </button>
-
-
-
         </div>
-
-
     )
 }
-
 
 export default StepperControl
