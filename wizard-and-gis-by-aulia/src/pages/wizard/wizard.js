@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Wizard extends Component {
     render() {
         return <dh-component>
-            <div class="w-11/12 lg:w-2/6 mx-auto">
+            <div class="w-11/12 lg:w-2/6 mx-auto py-12">
                 <div class="bg-gray-200 h-1 flex items-center justify-between">
                     <div class="w-1/3 bg-indigo-700 h-1 flex items-center">
                         <div class="bg-indigo-700 h-6 w-6 rounded-full shadow flex items-center justify-center">
