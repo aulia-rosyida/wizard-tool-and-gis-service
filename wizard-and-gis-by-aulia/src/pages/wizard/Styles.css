@@ -1,0 +1,45 @@
+@import url("~leaflet/dist/leaflet.css");
+
+.line {
+    @apply w-1/2 bg-indigo-700 h-1 flex items-center;
+}
+
+.circle-step {
+    @apply bg-indigo-700 h-6 w-6 rounded-full shadow flex items-center justify-center;
+}
+
+.datePicker {
+    width: 100%;
+    background: white;
+}
+
+input:checked+label {
+    border-color: black;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.leaflet-container {
+    width: 63vh;
+    height: 43vh;
+}
+
+.img-basemap {
+    @apply object-fill rounded-lg h-48;
+    width: 30%,
+}
+
+.img-review {
+    @apply object-contain rounded-lg h-80 object-right-top;
+}
+
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #323232;
+}
