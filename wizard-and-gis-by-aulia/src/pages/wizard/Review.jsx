@@ -9,7 +9,7 @@ function TextReview({ title, content }) {
     );
 }
 
-export default function Review() {
+export default function Review(props) {
 
     return (
         <div className="container mx-auto bg-white rounded-xl shadow border p-8 m-10">
@@ -19,12 +19,11 @@ export default function Review() {
             <div class="grid grid-cols-2 pl-20">
                 <img className="img-review object-top-right" src="https://osm.gs.mil/images/screenshots/slippymap.png" alt="OpenStreetMap" />
                 <div className='pt-4'>
-                    <TextReview title="Country" content="Indonesia" />
-                    <TextReview title="Area" content="Duong Lam" />
-                    <TextReview title="Date" content="01/01/2023 - 10/01/2027" />
+                    <TextReview title="Country" content={props.countryHolder.framework} />
+                    <TextReview title="Area" content={props.areaHolder.current} />
+                    <TextReview title="Date" content={props.periodHolder.startDate + " - " + props.periodHolder.endDate} />
                 </div>
             </div>
-
         </div>
     )
 }
