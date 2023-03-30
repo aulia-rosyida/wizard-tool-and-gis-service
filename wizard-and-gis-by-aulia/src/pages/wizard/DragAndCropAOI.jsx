@@ -34,43 +34,25 @@ export default class DragAndCropAOI extends Component {
                 </p>
                 <div class="flex items-center justify-center py-4">
                     <MapContainer center={position} zoom={this.state.zoom} scrollWheelZoom={false}>
-                        <TileLayer
-                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                        />
-                        <Marker position={position}>
-                            <Popup>
-                                <span>Marking an Area.<br />Change later.</span>
-                            </Popup>
-                        </Marker>
-                    </MapContainer>
-                </div>
-
-                <div class="flex items-center justify-center py-4">
-                    <MapContainer center={position} zoom={this.state.zoom} scrollWheelZoom={false}>
-                        <TileLayer
-                            attribution='&copy; <a href="https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9">Source: Esri, Maxar, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, and the GIS User Community</a> Powered by Esri'
-                            url='https://ibasemaps-api.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?token=AAPK66b2d6ca74724728812f8074446a0496th2t15LkkM-GHOQxIIpil5KveJkz6CSiV-voH2jaIie5FDzTEKoGiKxZkSDdb9sd'
-                            // url='
-                            // https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer?token=AAPK66b2d6ca74724728812f8074446a0496th2t15LkkM-GHOQxIIpil5KveJkz6CSiV-voH2jaIie5FDzTEKoGiKxZkSDdb9sd'
-                            crossOrigin={true}
-                        />
-                        <Marker position={position}>
-                            <Popup>
-                                <span>Marking an Area.<br />Change later.</span>
-                            </Popup>
-                        </Marker>
-                    </MapContainer>
-                </div>
-
-
-                <div class="flex items-center justify-center py-4">
-                    <MapContainer center={position} zoom={this.state.zoom} scrollWheelZoom={false}>
-                        <TileLayer
-                            attribution='&copy; <a href="https://about.google/brand-resource-center/products-and-services/geo-guidelines/#required-attribution"> Google satellite basemap</a>'
-                            url='https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}'
-                            crossOrigin={true}
-                        />
+                        {this.props.type === "osm" ?
+                            <TileLayer
+                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                            /> : <div />}
+                        {this.props.type === "ersi" ?
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9">Source: Esri, Maxar, GeoEye, Earthstar Geographics, CNES/Airbus DS, USDA, USGS, AeroGRID, IGN, and the GIS User Community</a> Powered by Esri'
+                                url='https://ibasemaps-api.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?token=AAPK66b2d6ca74724728812f8074446a0496th2t15LkkM-GHOQxIIpil5KveJkz6CSiV-voH2jaIie5FDzTEKoGiKxZkSDdb9sd'
+                                // url='
+                                // https://basemaps-api.arcgis.com/arcgis/rest/services/World_Basemap_v2/VectorTileServer?token=AAPK66b2d6ca74724728812f8074446a0496th2t15LkkM-GHOQxIIpil5KveJkz6CSiV-voH2jaIie5FDzTEKoGiKxZkSDdb9sd'
+                                crossOrigin={true}
+                            /> : <div />}
+                        {this.props.type === "gmaps" ?
+                            <TileLayer
+                                attribution='&copy; <a href="https://about.google/brand-resource-center/products-and-services/geo-guidelines/#required-attribution"> Google satellite basemap</a>'
+                                url='https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}'
+                                crossOrigin={true}
+                            /> : <div />}
                         <Marker position={position}>
                             <Popup>
                                 <span>Marking an Area.<br />Change later.</span>
