@@ -15,11 +15,7 @@ export default function FormData() {
         { value: "Laos", label: "Laos" },
     ];
 
-    const [period, setPeriodValue] = useState({
-        startDate: null,
-        endDate: null
-    });
-
+    const [period, setPeriodValue] = useState({ startDate: null, endDate: null });
     const handlePeriodChange = (newPeriod) => {
         console.log("newValue:", newPeriod.startDate, ' - ', newPeriod.endDate);
         setPeriodValue(newPeriod);
@@ -27,7 +23,15 @@ export default function FormData() {
 
     const [areaName, setAreaName] = useState("");
     const handleAreaChange = (event) => {
+        console.log("Area :", event.target.value);
         setAreaName(event.target.value);
+    };
+
+    const [country, setCountry] = React.useState({});
+    const handleCountryChange = (event) => {
+        const { name, value } = event.target;
+        setCountry({ ...country, [name]: value });
+        console.log("country :", event.target.value);
     };
 
     return (
@@ -40,6 +44,8 @@ export default function FormData() {
                     </p>
                     <div className="pb-8">
                         <TextField fullWidth select
+                            value={country.framework}
+                            onChange={(e) => handleCountryChange(e)}
                             id="filled-select"
                             label="Country"
                             variant="outlined"
