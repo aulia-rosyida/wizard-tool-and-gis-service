@@ -13,15 +13,12 @@ function App() {
   const steps = ["1", "2", "3", "4"]
 
   const [typeMap, setTypeMap] = useState("osm")
-
   const typeMapHandling = (mapChosen) => {
     setTypeMap(mapChosen.target.value)
-    console.log("PILIH mapChosen: ", mapChosen.target.value)
   }
 
   const [period, setPeriodValue] = useState({ startDate: null, endDate: null });
   const handlePeriodChange = (newPeriod) => {
-    console.log("newValue:", newPeriod.startDate, ' - ', newPeriod.endDate);
     setPeriodValue(newPeriod);
   }
 
@@ -30,17 +27,9 @@ function App() {
   const [country, setCountry] = useState({ framework: "" });
   const handleCountryChange = (countryEvent) => {
     setCountry({ framework: countryEvent.target.value });
-    console.log("country :", countryEvent.target.value, "===", country);
   };
 
-  useEffect(() => {
-    console.log("areaNameholder :", areaNameHolder.current);
-  }, [areaNameHolder])
-
-
-
   function DisplayStep({ step }) {
-    console.log("display step :" + step);
     switch (step) {
       case 1:
         return <FormData
@@ -75,7 +64,6 @@ function App() {
 
 
   return (
-
     <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
       <p className="text-3xl text-gray-700 font-bold mb-5 text-center">
         Welcome to Wizard tools and GIS Services!
