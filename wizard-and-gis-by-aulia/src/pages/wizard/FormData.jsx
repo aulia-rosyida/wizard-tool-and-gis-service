@@ -5,15 +5,21 @@ import './Styles.css';
 
 export default function FormData() {
 
+    //Indonesia, Malaysia, Thailand, Philipines, Vietnam, Cambodia, and Laos
+
     const countries = [
         { value: "Indonesia", label: "Indonesia" },
+        { value: "Malaysia", label: "Malaysia" },
+        { value: "Thailand", label: "Thailand" },
+        { value: "Philipines", label: "Philipines" },
+        { value: "Vietnam", label: "Vietnam" },
         { value: "Cambodia", label: "Cambodia" },
         { value: "Laos", label: "Laos" },
     ];
 
     const [value, setValue] = useState({
-        startDate: new Date(),
-        endDate: new Date().setMonth(11)
+        startDate: null,
+        endDate: null
     });
     const handleValueChange = (newValue) => {
         console.log("newValue:", newValue);
@@ -23,36 +29,37 @@ export default function FormData() {
 
     return (
         <div className="container mx-auto bg-white rounded-xl shadow border p-8 m-10" >
-            <p className="text-3xl text-gray-700 font-bold mb-5 text-center">
-                Form Data
-            </p>
-            <Grid container rowSpacing={1} columnSpacing={{ xs: 10, sm: 20, md: 30 }}>
-                <Grid item xs={6} className="pb-4 pr-4">
-                    <TextField fullWidth select id="filled-select" label="Indonesia" variant="outlined" className="mx-480 my-120 w-1/2 ">
-                        {countries.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-
-                </Grid>
-                <Grid item xs={6} className="pb-4 pr-4 light:bg-white bg-white">
-
-                    <Datepicker
-                        placeholderText='DD/MM/YYYY'
-                        dateFormat='dd/MM/yyyy'
-                        primaryColor={"sky"}
-                        value={value}
-                        onChange={handleValueChange}
-                        showShortcuts={true}
-                    />
-
-                </Grid>
-                <Grid item xs={6} className="pb-4 pr-4">
-                    <TextField fullWidth id="filled-basic" label="Name of the Area" variant="outlined" />
-                </Grid>
-            </Grid>
+            <div class="grid grid-cols-3 pl-20">
+                <div />
+                <div>
+                    <p className="text-3xl text-gray-700 font-bold mb-5 text-center pb-4">
+                        Form Data
+                    </p>
+                    <div className="pb-8">
+                        <TextField fullWidth select id="filled-select" label="Country" variant="outlined" className="mx-480 my-120 w-1/2 pb-12">
+                            {countries.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                    </div>
+                    <div className="pb-8">
+                        <TextField fullWidth id="filled-basic" label="Name of the Area" variant="outlined" />
+                    </div>
+                    <div className="container mx-auto bg-white rounded-md shadow border p-2">
+                        <Datepicker
+                            placeholderText='DD/MM/YYYY'
+                            dateFormat='dd/MM/yyyy'
+                            primaryColor={"sky"}
+                            value={value}
+                            onChange={handleValueChange}
+                            showShortcuts={true}
+                        />
+                    </div>
+                </div>
+                <div />
+            </div>
         </div >
     )
 }
