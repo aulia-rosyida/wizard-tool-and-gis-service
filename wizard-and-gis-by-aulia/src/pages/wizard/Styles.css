@@ -22,3 +22,14 @@ input:checked+label {
     width: 50%;
     height: 50vh;
 }
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #323232;
+}
