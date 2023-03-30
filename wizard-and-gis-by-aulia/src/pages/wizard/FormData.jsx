@@ -5,8 +5,6 @@ import './Styles.css';
 
 export default function FormData() {
 
-    //Indonesia, Malaysia, Thailand, Philipines, Vietnam, Cambodia, and Laos
-
     const countries = [
         { value: "Indonesia", label: "Indonesia" },
         { value: "Malaysia", label: "Malaysia" },
@@ -17,13 +15,13 @@ export default function FormData() {
         { value: "Laos", label: "Laos" },
     ];
 
-    const [value, setValue] = useState({
+    const [period, setPeriodValue] = useState({
         startDate: null,
         endDate: null
     });
-    const handleValueChange = (newValue) => {
-        console.log("newValue:", newValue);
-        setValue(newValue);
+    const handlePeriodChange = (newPeriod) => {
+        console.log("newValue:", newPeriod.startDate, ' - ', newPeriod.endDate);
+        setPeriodValue(newPeriod);
     }
 
 
@@ -52,8 +50,8 @@ export default function FormData() {
                             placeholderText='DD/MM/YYYY'
                             dateFormat='dd/MM/yyyy'
                             primaryColor={"sky"}
-                            value={value}
-                            onChange={handleValueChange}
+                            value={period}
+                            onChange={handlePeriodChange}
                             showShortcuts={true}
                         />
                     </div>
