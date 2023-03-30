@@ -1,5 +1,14 @@
 import React from 'react'
 
+function TextReview({ title, content }) {
+    return (
+        <div>
+            <p className="text-xl text-gray-700"> {title} :</p>
+            <p className="text-base text-gray-500 pb-3"> {content} </p>
+        </div>
+    );
+}
+
 export default function Review() {
 
     return (
@@ -7,12 +16,14 @@ export default function Review() {
             <p className="text-3xl text-gray-700 font-bold mb-5 text-center">
                 Review
             </p>
-            <p className="text-gray-500 text-lg text-center">
-                Created by Aulia Rosyida
-            </p>
-            <p className="text-3xl text-gray-700 text-center pt-12">
-                Create Proposal Document
-            </p>
+            <div class="grid grid-cols-2 pl-20">
+                <img className="img-review object-top-right" src="https://osm.gs.mil/images/screenshots/slippymap.png" alt="OpenStreetMap" />
+                <div className='pt-4'>
+                    <TextReview title="Country" content="Indonesia" />
+                    <TextReview title="Area" content="Duong Lam" />
+                    <TextReview title="Date" content="01/01/2023 - 10/01/2027" />
+                </div>
+            </div>
 
         </div>
     )

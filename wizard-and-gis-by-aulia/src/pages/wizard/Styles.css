@@ -24,8 +24,14 @@ input:checked+label {
 }
 
 .img-basemap {
-    @apply rounded-lg w-60 h-48;
+    @apply object-fill rounded-lg h-48;
+    width: 30%,
 }
+
+.img-review {
+    @apply object-contain rounded-lg h-80 object-right-top;
+}
+
 
 #map {
     position: absolute;
