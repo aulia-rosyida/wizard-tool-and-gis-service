@@ -3,10 +3,9 @@ import DragAndCropAOI from 'pages/wizard/DragAndCropAOI';
 import FormData from 'pages/wizard/FormData';
 import Review from 'pages/wizard/Review';
 import SelectBasemap from 'pages/wizard/SelectBasemap';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './App.css';
 import { Stepper } from 'react-form-stepper';
-
 
 
 function App() {
@@ -20,18 +19,48 @@ function App() {
     console.log("PILIH mapChosen: ", mapChosen.target.value)
   }
 
+  const [period, setPeriodValue] = useState({ startDate: null, endDate: null });
+  const handlePeriodChange = (newPeriod) => {
+    console.log("newValue:", newPeriod.startDate, ' - ', newPeriod.endDate);
+    setPeriodValue(newPeriod);
+  }
+
+  const areaNameHolder = useRef(null);
+
+  const [country, setCountry] = useState({ framework: "" });
+  const handleCountryChange = (countryEvent) => {
+    setCountry({ framework: countryEvent.target.value });
+    console.log("country :", countryEvent.target.value, "===", country);
+  };
+
+  useEffect(() => {
+    console.log("areaNameholder :", areaNameHolder.current);
+  }, [areaNameHolder])
+
+
 
   function DisplayStep({ step }) {
     console.log("display step :" + step);
     switch (step) {
       case 1:
-        return <FormData />
+        return <FormData
+          key="area-form"
+          periodData={period}
+          areaHolder={areaNameHolder}
+          countryData={country}
+          onPeriodChange={handlePeriodChange}
+          onCountryChange={handleCountryChange}
+
+        />
       case 2:
         return <SelectBasemap onChoose={typeMapHandling} mapId={typeMap} />
       case 3:
-        return <DragAndCropAOI />
+        return <DragAndCropAOI type={typeMap} />
       case 4:
-        return <Review />
+        return <Review
+          areaHolder={areaNameHolder}
+          countryHolder={country}
+          periodHolder={period} />
       default:
         return <FormData />
     }
