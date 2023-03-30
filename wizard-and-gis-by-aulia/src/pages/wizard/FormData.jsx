@@ -26,12 +26,9 @@ export default function FormData() {
     }
 
     const [areaName, setAreaName] = useState("");
-
     const handleAreaChange = (event) => {
         setAreaName(event.target.value);
     };
-
-
 
     return (
         <div className="container mx-auto bg-white rounded-xl shadow border p-8 m-10" >
