@@ -19,10 +19,18 @@ export default function FormData() {
         startDate: null,
         endDate: null
     });
+
     const handlePeriodChange = (newPeriod) => {
         console.log("newValue:", newPeriod.startDate, ' - ', newPeriod.endDate);
         setPeriodValue(newPeriod);
     }
+
+    const [areaName, setAreaName] = useState("");
+
+    const handleAreaChange = (event) => {
+        setAreaName(event.target.value);
+    };
+
 
 
     return (
@@ -34,16 +42,28 @@ export default function FormData() {
                         Form Data
                     </p>
                     <div className="pb-8">
-                        <TextField fullWidth select id="filled-select" label="Country" variant="outlined" className="mx-480 my-120 w-1/2 pb-12">
+                        <TextField fullWidth select
+                            id="filled-select"
+                            label="Country"
+                            variant="outlined"
+                            className="mx-480 my-120 w-1/2 pb-12">
                             {countries.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
+                                <MenuItem
+                                    key={option.value}
+                                    value={option.value}>
                                     {option.label}
                                 </MenuItem>
                             ))}
                         </TextField>
                     </div>
                     <div className="pb-8">
-                        <TextField fullWidth id="filled-basic" label="Name of the Area" variant="outlined" />
+                        <TextField fullWidth
+                            id="filled-basic"
+                            label="Name of the Area"
+                            variant="outlined"
+                            value={areaName}
+                            onChange={(e) => handleAreaChange(e)}
+                        />
                     </div>
                     <div className="container mx-auto bg-white rounded-md shadow border p-2">
                         <Datepicker
