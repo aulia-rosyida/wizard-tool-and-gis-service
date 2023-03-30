@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, useRef, useEffect } from 'react'
 import './Styles.css';
 import Leaflet from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMapEvents } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMapEvents, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import PeatJson from '../../assets/indonesia_peat_distribution.json';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
+import 'leaflet-draw/dist/leaflet.draw';
 
 Leaflet.Icon.Default.imagePath =
     '../node_modules/leaflet'
@@ -19,22 +21,55 @@ Leaflet.Icon.Default.mergeOptions({
 });
 
 function ClickedComponent() {
-    const map = useMapEvents({
+    const mapEvent = useMapEvents({
         click: (e) => {
             const { lat, lng } = e.latlng;
-            const myIcon = new Leaflet.Icon({
+            const markerCustomIcon = new Leaflet.Icon({
                 iconUrl: icon,
-                iconSize: [25, 41],
+                iconSize: [20, 36],
                 iconAnchor: [12, 41],
                 popupAnchor: [1, -34],
-                shadowUrl: 'leaflet/dist/images/marker-shadow.png',
-                shadowSize: [41, 41],
-                shadowAnchor: [12, 41]
             });
-            const marker = Leaflet.marker([lat, lng], { icon: myIcon }).addTo(map);
+            const marker = Leaflet.marker([lat, lng], { icon: markerCustomIcon }).addTo(mapEvent);
             marker.bindPopup("Lat: " + lat + "\nLng: " + lng).openPopup();
         }
     });
+    return null;
+}
+
+
+function DrawingComponent() {
+    const map = useMap();
+    const drawnItemsRef = useRef();
+
+    useEffect(() => {
+        const drawnItems = new Leaflet.FeatureGroup();
+        map.addLayer(drawnItems);
+        drawnItemsRef.current = drawnItems;
+
+        const drawControl = new Leaflet.Control.Draw({
+            draw: {
+                polygon: true,
+                marker: false,
+                circle: false,
+                rectangle: false,
+                polyline: false
+            },
+            edit: { featureGroup: drawnItems }
+        });
+        map.addControl(drawControl);
+
+        map.on(Leaflet.Draw.Event.CREATED, (event) => {
+            const { layer } = event;
+            drawnItems.addLayer(layer);
+        });
+
+        return () => {
+            map.removeControl(drawControl);
+            map.removeLayer(drawnItems);
+        };
+    }, [map]);
+
     return null;
 }
 
@@ -80,6 +115,7 @@ export default class DragAndCropAOI extends Component {
                                 url='https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}'
                                 crossOrigin={true}
                             /> : <div />}
+                        <DrawingComponent />
                         <ClickedComponent />
                         <GeoJSON attribution="&copy; credits due..." data={PeatJson} />
                         <Marker position={position}>
@@ -87,7 +123,6 @@ export default class DragAndCropAOI extends Component {
                                 <span>First Coordinate:<br />Lat: {this.state.lat} - Lng: {this.state.lng}</span>
                             </Popup>
                         </Marker>
-
                     </MapContainer>
                 </div>
             </div>
