@@ -21,7 +21,7 @@ export default class DragAndCropAOI extends Component {
     state = {
         lat: 1.694394,
         lng: 101.445007,
-        zoom: 5,
+        zoom: 8,
     }
 
     render() {
