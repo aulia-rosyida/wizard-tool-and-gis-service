@@ -6,7 +6,7 @@ import SelectBasemap from 'pages/wizard/SelectBasemap';
 import { useState, useRef, useEffect } from 'react';
 import './App.css';
 import { Stepper } from 'react-form-stepper';
-import { Alert } from 'react-alert'
+import JsPDF from 'jspdf';
 
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
 
   const steps = ["1", "2", "3", "4"]
 
-  //// VARIABLE NEEDED 1ST STEP
+  ///////////////////////// VARIABLE NEEDED 1ST STEP /////////////////////////
   const [validateForm, setValidateForm] = useState(false)
   const [period, setPeriodValue] = useState({ startDate: null, endDate: null });
   const handlePeriodChange = (newPeriod) => {
@@ -28,14 +28,13 @@ function App() {
     setCountry({ framework: countryEvent.target.value });
   };
 
-  //// VARIABLE NEEDED 2ND STEP
+  ///////////////////////// VARIABLE NEEDED 2ND STEP /////////////////////////
   const [typeMap, setTypeMap] = useState("osm")
   const typeMapHandling = (mapChosen) => {
     setTypeMap(mapChosen.target.value)
   }
 
-  //// VARIABLE NEEDED 3ST STEP
-
+  ///////////////////////// VARIABLE NEEDED 3ST STEP /////////////////////////
   const [loading, setLoading] = useState(false);
 
   const mapRefHolder = useRef(null);
@@ -44,7 +43,7 @@ function App() {
     setScreenshotUrl(urlEvent.target.value);
   };
 
-  /// STEP SCREEN COMPONENTs 
+  ///////////////////////// STEP SCREEN COMPONENTS /////////////////////////
 
   function DisplayStep({ step }) {
     switch (step) {
@@ -79,6 +78,7 @@ function App() {
     }
   }
 
+  ///////////////////////// BUTTON HANDLING /////////////////////////
   const handleClick = (direction) => {
     let newStep = currentStep;
 
@@ -92,7 +92,7 @@ function App() {
 
     if (newStep > 0 && newStep <= steps.length && isFormValid()) {
       setCurrentStep(newStep);
-    }
+    } else if (newStep === 4) generatePDF();
   }
 
   useEffect(() => {
@@ -102,6 +102,15 @@ function App() {
   function isFormValid() {
     return country !== "" && areaNameHolder.current !== null && period.startDate !== null && period.endDate !== null;
   }
+
+  const generatePDF = () => {
+    const report = new JsPDF('portrait', 'pt', 'a4');
+    report.html(document.querySelector('#report')).then(() => {
+      report.save('report.pdf');
+    });
+  }
+
+  ///////////////////////// SCREEN /////////////////////////
 
   return (
     <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
