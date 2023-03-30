@@ -3,20 +3,19 @@ import DragAndCropAOI from 'pages/wizard/DragAndCropAOI';
 import FormData from 'pages/wizard/FormData';
 import Review from 'pages/wizard/Review';
 import SelectBasemap from 'pages/wizard/SelectBasemap';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './App.css';
 import { Stepper } from 'react-form-stepper';
+import { Alert } from 'react-alert'
 
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1);
+
   const steps = ["1", "2", "3", "4"]
 
-  const [typeMap, setTypeMap] = useState("osm")
-  const typeMapHandling = (mapChosen) => {
-    setTypeMap(mapChosen.target.value)
-  }
-
+  //// VARIABLE NEEDED 1ST STEP
+  const [validateForm, setValidateForm] = useState(false)
   const [period, setPeriodValue] = useState({ startDate: null, endDate: null });
   const handlePeriodChange = (newPeriod) => {
     setPeriodValue(newPeriod);
@@ -29,6 +28,14 @@ function App() {
     setCountry({ framework: countryEvent.target.value });
   };
 
+  //// VARIABLE NEEDED 2ND STEP
+  const [typeMap, setTypeMap] = useState("osm")
+  const typeMapHandling = (mapChosen) => {
+    setTypeMap(mapChosen.target.value)
+  }
+
+  //// VARIABLE NEEDED 3ST STEP
+
   const [loading, setLoading] = useState(false);
 
   const mapRefHolder = useRef(null);
@@ -37,18 +44,25 @@ function App() {
     setScreenshotUrl(urlEvent.target.value);
   };
 
+  /// STEP SCREEN COMPONENTs 
+
   function DisplayStep({ step }) {
     switch (step) {
       case 1:
-        return <FormData
-          key="area-form"
-          periodData={period}
-          areaHolder={areaNameHolder}
-          countryData={country}
-          onPeriodChange={handlePeriodChange}
-          onCountryChange={handleCountryChange}
-
-        />
+        return <div>
+          <FormData
+            key="area-form"
+            periodData={period}
+            areaHolder={areaNameHolder}
+            countryData={country}
+            onPeriodChange={handlePeriodChange}
+            onCountryChange={handleCountryChange}
+          />
+          {validateForm && !isFormValid() ?
+            <p className=" text-red-500 font-bold mb-5 text-center">
+              Please fill all the field first
+            </p> : <div />}
+        </div>
       case 2:
         return <SelectBasemap onChoose={typeMapHandling} mapId={typeMap} />
       case 3:
@@ -67,8 +81,26 @@ function App() {
 
   const handleClick = (direction) => {
     let newStep = currentStep;
+
     direction === "next" ? newStep++ : newStep--;
-    if (newStep > 0 && newStep <= steps.length) setCurrentStep(newStep);
+    if (direction === "previous") {
+      setCountry({ framework: "" });
+      setPeriodValue({ startDate: null, endDate: null });
+    }
+
+    else if (!isFormValid()) setValidateForm(true);
+
+    if (newStep > 0 && newStep <= steps.length && isFormValid()) {
+      setCurrentStep(newStep);
+    }
+  }
+
+  useEffect(() => {
+    setValidateForm(false);
+  }, [areaNameHolder, period, country]);
+
+  function isFormValid() {
+    return country !== "" && areaNameHolder.current !== null && period.startDate !== null && period.endDate !== null;
   }
 
   return (
