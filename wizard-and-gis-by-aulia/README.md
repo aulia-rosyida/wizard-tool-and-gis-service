@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Wizard Tools with GIS Services
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Features (Done)
+- [x] Leaflet
+- [x] ReactJs
+- [x] 4 step wizard
+- [x] Step 1: Input Form (Dropdown, TextField, Date Picker)
+- [x] Step 2: Choose preferred Basemap (OpenStreetmap, Google Basemap)
+- [x] Step 3: 
+        - Shows a window with basemap 
+        - Load Default Map Layer (Indonesia peat distribution) using Geojson 
+        - Drawing polygon enhancement with calculating area tooltip
+        - Marking point enhancement with coordinate tooltip
+- [x] Step 4: Review Screen
+- [x] Change Bootstrap to Tailwind
 
-In the project directory, you can run:
+## Features (Needed Improvement)
+- Step 2: Esri Map 
+  Progress: Already got API KEY for the url and maps can be showing
+  Problem: After some hours it doesn't appeared 
 
-### `npm start`
+- Step 3: Screenshot basemap
+  Progress: Already find a library that recommended: leaflet-simple-map-screenshoter
+  Problem: When try to implemented it, it is not working yet
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Step 4: Export PDF
+  Progress: Already find a library that recommended: jspdf
+  Problem: When try to implemented it, it is not working yet
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features (Not Implemented Yet)
+- Second Page : Upload geospatial (Shapefile data)
+- Login system with username, email, name, and password
 
-### `npm test`
+## How to use
+- clone this repo
+```
+    git clone git@github.com:aulia-rosyida/wizard-tool-and-gis-service.git
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- install depp
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+    yarn or yarn install
+```
+- run project
+```
+    yarn start
+```
