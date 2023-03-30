@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import './Styles.css';
 import Leaflet from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
+import PeatJson from '../../assets/indonesia_peat_distribution.json';
 
 Leaflet.Icon.Default.imagePath =
     '../node_modules/leaflet'
@@ -18,9 +19,9 @@ Leaflet.Icon.Default.mergeOptions({
 
 export default class DragAndCropAOI extends Component {
     state = {
-        lat: 41.257017,
-        lng: 29.077524,
-        zoom: 13,
+        lat: 1.694394,
+        lng: 101.445007,
+        zoom: 5,
     }
 
     render() {
@@ -53,9 +54,10 @@ export default class DragAndCropAOI extends Component {
                                 url='https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}'
                                 crossOrigin={true}
                             /> : <div />}
+                        <GeoJSON attribution="&copy; credits due..." data={PeatJson} />
                         <Marker position={position}>
                             <Popup>
-                                <span>Marking an Area.<br />Change later.</span>
+                                <span>Starting point:<br />Dumai, Indonesia</span>
                             </Popup>
                         </Marker>
                     </MapContainer>
