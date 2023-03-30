@@ -3,7 +3,7 @@ import { TextField, MenuItem } from '@material-ui/core';
 import Datepicker from "react-tailwindcss-datepicker";
 import './Styles.css';
 
-export default function FormData() {
+export default function FormData(props) {
 
     const countries = [
         { value: "Indonesia", label: "Indonesia" },
@@ -15,28 +15,15 @@ export default function FormData() {
         { value: "Laos", label: "Laos" },
     ];
 
-    const [period, setPeriodValue] = useState({ startDate: null, endDate: null });
-    const handlePeriodChange = (newPeriod) => {
-        console.log("newValue:", newPeriod.startDate, ' - ', newPeriod.endDate);
-        setPeriodValue(newPeriod);
-    }
-
     const [areaName, setAreaName] = useState("");
     const handleAreaChange = (event) => {
-        console.log("Area :", event.target.value);
+        props.areaHolder.current = event.target.value;
         setAreaName(event.target.value);
-    };
-
-    const [country, setCountry] = React.useState({});
-    const handleCountryChange = (event) => {
-        const { name, value } = event.target;
-        setCountry({ ...country, [name]: value });
-        console.log("country :", event.target.value);
     };
 
     return (
         <div className="container mx-auto bg-white rounded-xl shadow border p-8 m-10" >
-            <div class="grid grid-cols-3 pl-20">
+            <div className="grid grid-cols-3 pl-20">
                 <div />
                 <div>
                     <p className="text-3xl text-gray-700 font-bold mb-5 text-center pb-4">
@@ -44,8 +31,8 @@ export default function FormData() {
                     </p>
                     <div className="pb-8">
                         <TextField fullWidth select
-                            value={country.framework}
-                            onChange={(e) => handleCountryChange(e)}
+                            value={props.countryData.framework}
+                            onChange={props.onCountryChange}
                             id="filled-select"
                             label="Country"
                             variant="outlined"
@@ -65,7 +52,7 @@ export default function FormData() {
                             label="Name of the Area"
                             variant="outlined"
                             value={areaName}
-                            onChange={(e) => handleAreaChange(e)}
+                            onChange={handleAreaChange}
                         />
                     </div>
                     <div className="container mx-auto bg-white rounded-md shadow border p-2">
@@ -73,8 +60,8 @@ export default function FormData() {
                             placeholderText='DD/MM/YYYY'
                             dateFormat='dd/MM/yyyy'
                             primaryColor={"sky"}
-                            value={period}
-                            onChange={handlePeriodChange}
+                            value={props.periodData}
+                            onChange={props.onPeriodChange}
                             showShortcuts={true}
                         />
                     </div>
@@ -84,5 +71,3 @@ export default function FormData() {
         </div >
     )
 }
-
-// export default FormData
