@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Styles.css';
 
 
-function Option({ name, id }) {
+function Option({ name, id, chosenId, onOptionChange }) {
     return (
         <div>
-            <input class="hidden" id={id} type="radio" name="radio" checked />
+            <input class="hidden" id={id} value={id} type="radio" name="radio" checked={id === chosenId} onChange={onOptionChange} />
             <label class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer" for={id}>
                 <span class="text-xl font-bold mt-2 text-center pb-4">{name}</span>
                 {id === "osm" ? <img className="img-basemap" src="https://osm.gs.mil/images/screenshots/slippymap.png" alt="OpenStreetMap" /> : <div />}
@@ -18,6 +18,12 @@ function Option({ name, id }) {
 
 
 export default function SelectBasemap() {
+    const [typeMap, setTypeMap] = useState("")
+
+    const typeMapHandle = (e) => {
+        setTypeMap(e.target.value)
+        console.log("PILIH: ", e.target.value)
+    }
 
     return (
         <div className="container mx-auto bg-white rounded-xl shadow border p-8 m-10">
@@ -26,9 +32,9 @@ export default function SelectBasemap() {
             </p>
             <div class="flex items-center justify-center py-12">
                 <form class="grid grid-cols-3 gap-8 w-full">
-                    <Option name="OpenStreetMap" id="osm" />
-                    <Option name="ESRI Map" id="esri" />
-                    <Option name="Google Maps" id="gmaps" />
+                    <Option name="OpenStreetMap" id="osm" chosenId={typeMap} onOptionChange={typeMapHandle} />
+                    <Option name="ESRI Map" id="esri" chosenId={typeMap} onOptionChange={typeMapHandle} />
+                    <Option name="Google Maps" id="gmaps" chosenId={typeMap} onOptionChange={typeMapHandle} />
                 </form>
             </div>
         </div>
