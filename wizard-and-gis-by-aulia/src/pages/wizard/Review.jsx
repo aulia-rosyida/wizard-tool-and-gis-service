@@ -17,7 +17,7 @@ export default function Review(props) {
                 Review
             </p>
             <div class="grid grid-cols-2 pl-20">
-                <img className="img-review object-top-right" src="https://osm.gs.mil/images/screenshots/slippymap.png" alt="OpenStreetMap" />
+                <img className="img-review object-top-right" src={props.screenshotHolder == null ? "https://osm.gs.mil/images/screenshots/slippymap.png" : props.screenshotHolder} alt="Map Screenshot" />
                 <div className='pt-4'>
                     <TextReview title="Country" content={props.countryHolder.framework} />
                     <TextReview title="Area" content={props.areaHolder.current} />

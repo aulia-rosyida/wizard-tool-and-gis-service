@@ -3,7 +3,7 @@ import DragAndCropAOI from 'pages/wizard/DragAndCropAOI';
 import FormData from 'pages/wizard/FormData';
 import Review from 'pages/wizard/Review';
 import SelectBasemap from 'pages/wizard/SelectBasemap';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import './App.css';
 import { Stepper } from 'react-form-stepper';
 
@@ -29,6 +29,14 @@ function App() {
     setCountry({ framework: countryEvent.target.value });
   };
 
+  const [loading, setLoading] = useState(false);
+
+  const mapRefHolder = useRef(null);
+  const [screenshotUrl, setScreenshotUrl] = useState("");
+  const handleScreenshotUrl = (urlEvent) => {
+    setScreenshotUrl(urlEvent.target.value);
+  };
+
   function DisplayStep({ step }) {
     switch (step) {
       case 1:
@@ -44,9 +52,11 @@ function App() {
       case 2:
         return <SelectBasemap onChoose={typeMapHandling} mapId={typeMap} />
       case 3:
-        return <DragAndCropAOI type={typeMap} />
+        return <DragAndCropAOI type={typeMap}
+          mapRef={mapRefHolder} />
       case 4:
         return <Review
+          screenshotHolder={screenshotUrl}
           areaHolder={areaNameHolder}
           countryHolder={country}
           periodHolder={period} />
@@ -55,13 +65,11 @@ function App() {
     }
   }
 
-
   const handleClick = (direction) => {
     let newStep = currentStep;
     direction === "next" ? newStep++ : newStep--;
     if (newStep > 0 && newStep <= steps.length) setCurrentStep(newStep);
   }
-
 
   return (
     <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
@@ -96,7 +104,9 @@ function App() {
         />
       </div>
       <DisplayStep step={currentStep} />
-      <StepperControl handleClick={handleClick} currentStep={currentStep} steps={steps} />
+      {loading ?
+        <p>Generating screenshot... Please wait for some minutes</p>
+        : <StepperControl handleClick={handleClick} currentStep={currentStep} steps={steps} />}
     </div>
 
   );
