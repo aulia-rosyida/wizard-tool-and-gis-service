@@ -11,8 +11,15 @@ import { Stepper } from 'react-form-stepper';
 
 function App() {
   const [currentStep, setCurrentStep] = useState(1);
-
   const steps = ["1", "2", "3", "4"]
+
+  const [typeMap, setTypeMap] = useState("osm")
+
+  const typeMapHandling = (mapChosen) => {
+    setTypeMap(mapChosen.target.value)
+    console.log("PILIH mapChosen: ", mapChosen.target.value)
+  }
+
 
   function DisplayStep({ step }) {
     console.log("display step :" + step);
@@ -20,7 +27,7 @@ function App() {
       case 1:
         return <FormData />
       case 2:
-        return <SelectBasemap />
+        return <SelectBasemap onChoose={typeMapHandling} mapId={typeMap} />
       case 3:
         return <DragAndCropAOI />
       case 4:
@@ -36,19 +43,6 @@ function App() {
     direction === "next" ? newStep++ : newStep--;
     if (newStep > 0 && newStep <= steps.length) setCurrentStep(newStep);
   }
-
-  // const state = {
-  //   country = '',
-  //   areaName = '',
-  //   periodEvent = '',
-  //   basemapType = '',
-  //   areaOfInterest = '',
-  // }
-
-  // handleChange = input => e => {
-  //   this.setState({ [input]: e.target.value });
-  // }
-
 
 
   return (

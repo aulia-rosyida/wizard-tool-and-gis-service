@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Styles.css';
 
 
@@ -16,14 +16,7 @@ function Option({ name, id, chosenId, onOptionChange }) {
     );
 }
 
-
-export default function SelectBasemap() {
-    const [typeMap, setTypeMap] = useState("")
-
-    const typeMapHandle = (e) => {
-        setTypeMap(e.target.value)
-        console.log("PILIH: ", e.target.value)
-    }
+export default function SelectBasemap(props) {
 
     return (
         <div className="container mx-auto bg-white rounded-xl shadow border p-8 m-10">
@@ -32,9 +25,9 @@ export default function SelectBasemap() {
             </p>
             <div class="flex items-center justify-center py-12">
                 <form class="grid grid-cols-3 gap-8 w-full">
-                    <Option name="OpenStreetMap" id="osm" chosenId={typeMap} onOptionChange={typeMapHandle} />
-                    <Option name="ESRI Map" id="esri" chosenId={typeMap} onOptionChange={typeMapHandle} />
-                    <Option name="Google Maps" id="gmaps" chosenId={typeMap} onOptionChange={typeMapHandle} />
+                    <Option name="OpenStreetMap" id="osm" chosenId={props.mapId} onOptionChange={props.onChoose} />
+                    <Option name="ESRI Map" id="esri" chosenId={props.mapId} onOptionChange={props.onChoose} />
+                    <Option name="Google Maps" id="gmaps" chosenId={props.mapId} onOptionChange={props.onChoose} />
                 </form>
             </div>
         </div>
