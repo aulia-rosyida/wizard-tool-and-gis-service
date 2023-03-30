@@ -19,8 +19,12 @@ input:checked+label {
 }
 
 .leaflet-container {
-    width: 50%;
-    height: 50vh;
+    width: 63vh;
+    height: 43vh;
+}
+
+.img-basemap {
+    @apply rounded-lg w-60 h-48;
 }
 
 #map {
