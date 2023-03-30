@@ -2,7 +2,7 @@ import React from 'react'
 import './Styles.css';
 
 
-function Option({ name, id, imagePath }) {
+function Option({ name, id }) {
     return (
         <div>
             <input class="hidden" id={id} type="radio" name="radio" checked />
