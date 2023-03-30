@@ -62,6 +62,8 @@ function DrawingComponent() {
         map.on(Leaflet.Draw.Event.CREATED, (event) => {
             const { layer } = event;
             drawnItems.addLayer(layer);
+            var squareMetersArea = Leaflet.GeometryUtil.geodesicArea(layer.getLatLngs()[0]);
+            drawnItems.bindPopup("Calculate Area (M^2):" + squareMetersArea).openPopup();
         });
 
         return () => {
