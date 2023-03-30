@@ -17,15 +17,21 @@
 
 ## Features (Needed Improvement)
 - Step 2: Esri Map 
+
   Progress: Already got API KEY for the url and maps can be showing
+
   Problem: After some hours it doesn't appeared 
 
 - Step 3: Screenshot basemap
+
   Progress: Already find a library that recommended: leaflet-simple-map-screenshoter
+
   Problem: When try to implemented it, it is not working yet
 
 - Step 4: Export PDF
+
   Progress: Already find a library that recommended: jspdf
+  
   Problem: When try to implemented it, it is not working yet
 
 ## Features (Not Implemented Yet)
