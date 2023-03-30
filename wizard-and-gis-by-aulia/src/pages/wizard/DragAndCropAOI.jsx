@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import './Styles.css';
 import Leaflet from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMapEvents } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import PeatJson from '../../assets/indonesia_peat_distribution.json';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import 'leaflet/dist/leaflet.css';
 
 Leaflet.Icon.Default.imagePath =
     '../node_modules/leaflet'
@@ -16,17 +18,39 @@ Leaflet.Icon.Default.mergeOptions({
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
+function ClickedComponent() {
+    const map = useMapEvents({
+        click: (e) => {
+            const { lat, lng } = e.latlng;
+            const myIcon = new Leaflet.Icon({
+                iconUrl: icon,
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowUrl: 'leaflet/dist/images/marker-shadow.png',
+                shadowSize: [41, 41],
+                shadowAnchor: [12, 41]
+            });
+            const marker = Leaflet.marker([lat, lng], { icon: myIcon }).addTo(map);
+            marker.bindPopup("Lat: " + lat + "\nLng: " + lng).openPopup();
+        }
+    });
+    return null;
+}
+
 
 export default class DragAndCropAOI extends Component {
+
     state = {
+        screenshotUrl: null,
         lat: 1.694394,
         lng: 101.445007,
         zoom: 8,
-    }
+    };
+
 
     render() {
         const position = [this.state.lat, this.state.lng];
-
 
         return (
             <div className="container mx-auto bg-white rounded-xl shadow border p-8 m-10">
@@ -34,7 +58,9 @@ export default class DragAndCropAOI extends Component {
                     Drag And Crop Area Of Interest
                 </p>
                 <div class="flex items-center justify-center py-4">
-                    <MapContainer center={position} zoom={this.state.zoom} scrollWheelZoom={false}>
+                    <MapContainer ref={this.props.mapRef}
+                        center={position} zoom={this.state.zoom}
+                        scrollWheelZoom={false}>
                         {this.props.type === "osm" ?
                             <TileLayer
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -54,12 +80,14 @@ export default class DragAndCropAOI extends Component {
                                 url='https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}'
                                 crossOrigin={true}
                             /> : <div />}
+                        <ClickedComponent />
                         <GeoJSON attribution="&copy; credits due..." data={PeatJson} />
                         <Marker position={position}>
                             <Popup>
-                                <span>Starting point:<br />Dumai, Indonesia</span>
+                                <span>First Coordinate:<br />Lat: {this.state.lat} - Lng: {this.state.lng}</span>
                             </Popup>
                         </Marker>
+
                     </MapContainer>
                 </div>
             </div>
